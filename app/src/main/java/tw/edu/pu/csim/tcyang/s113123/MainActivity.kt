@@ -22,21 +22,17 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // 強制設定螢幕為直式
         requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
-        // 隱藏狀態列和導覽列
         val windowInsetsController =
             WindowCompat.getInsetsController(window, window.decorView)
         windowInsetsController.systemBarsBehavior =
             WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
         windowInsetsController.hide(WindowInsetsCompat.Type.systemBars())
 
-        // enableEdgeToEdge() // 在全螢幕模式下，可以註解掉或保留
 
         setContent {
             S113123Theme {
-                // 2. 將 Scaffold 和 Greeting 替換成 ExamScreen()
                 ExamScreen()
             }
         }
