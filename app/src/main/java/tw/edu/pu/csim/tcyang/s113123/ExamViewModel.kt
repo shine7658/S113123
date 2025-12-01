@@ -3,27 +3,47 @@ package tw.edu.pu.csim.tcyang.s113123
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.geometry.Rect
 import androidx.lifecycle.ViewModel
 
 class ExamViewModel : ViewModel() {
-    // 使用 mutableStateOf 來建立可觀察的狀態
-    // 這樣當值改變時，Compose UI 會自動更新
-
-    // 作者資訊，請修改成您自己的系級與姓名
+    // 作者資訊
     var author by mutableStateOf("資管二B 林哲旭")
-        private set // private set 表示只能在 ViewModel 內部修改
-
-    // 螢幕寬度，初始值為 0f
-    var screenWidth by mutableStateOf(0f)
         private set
 
-    // 螢幕高度，初始值為 0f
+    // 螢幕寬高
+    var screenWidth by mutableStateOf(0f)
+        private set
     var screenHeight by mutableStateOf(0f)
+        private set
+
+    // *** 新增分數和訊息屬性 ***
+    var score by mutableStateOf(0)
+        private set
+    var message by mutableStateOf("")
         private set
 
     // 更新螢幕尺寸的方法
     fun updateScreenSize(width: Float, height: Float) {
         screenWidth = width
         screenHeight = height
+    }
+
+    // *** 新增碰撞檢測及更新分數的邏輯 ***
+
+    // 檢查服務圖示 (rect1) 是否與角色圖示 (rect2) 重疊
+    fun checkCollision(rect1: Rect, rect2: Rect): Boolean {
+        return rect1.overlaps(rect2)
+    }
+
+    // 更新分數和訊息
+    fun updateScore(newScore: Int, newMessage: String) {
+        score = newScore
+        message = newMessage
+    }
+
+    // 重設訊息
+    fun clearMessage() {
+        message = ""
     }
 }
